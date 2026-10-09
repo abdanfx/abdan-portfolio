@@ -1,90 +1,90 @@
-# ABDAN PORTFOLIO — Career Launch v1.0
+# ABDAN PORTFOLIO
 
-A job-focused, responsive portfolio for **Abdan Syakuran**. Built with HTML, CSS, and a small amount of JavaScript. **No framework, build tools, dependencies, accounts, or running backend are required.** Intended as a credible entry point for frontend/web developer applications.
+**Abdan Syakuran** (`abdanfx`) · **ABDAN LABS** · Indonesia
 
-## What it includes
+A responsive, recruiter-focused engineering portfolio showcasing practical web applications, offline-first software, weather integration, and ongoing AI product work.
 
-- A recruiter-oriented, English-language introduction
-- Three working project highlights with direct demo links
-- ABDAN AI shown accurately as **in development**
-- Engineering decisions, technology stack, skills, and personal background
-- Responsive layout, skip link, native anchors, keyboard focus, reduced-motion preference, SEO metadata, and security headers for Cloudflare Pages
-- Original **CSS illustrations**, clearly identified as illustrative, not actual screenshots
-- A configurable email CTA, defaulting to the known GitHub profile until a verified email is supplied
-- `docs/APPLICATION-KIT.md` for job applications and a CV outline
+**[Live portfolio](https://abdan-portfolio.pages.dev/)** · [GitHub](https://github.com/abdanfx) · [Email](mailto:abdansyakuran@hotmail.com)
 
-## IMPORTANT: customize before public launch
+## Featured projects
 
-1. **Contact:** Open `script.js` and set `CONTACT_EMAIL = 'your.real.email@example.com'`; this changes the primary contact CTA to a mailto link. Until you do, the primary CTA opens GitHub. Never publish a guessed email address.
-2. **Copy:** Review all job titles, technology labels, project descriptions and current project status. They were drafted from existing project information and may need updating.
-3. **URLs:** Verify all three demo URLs from your own browser. Some Cloudflare-hosted demos could not be checked with the retrieval tool during preparation.
-4. **Screenshots:** Optional future enhancement: replace CSS mockups with **your own actual, optimized WebP screenshots**, which are stronger evidence for hiring managers. Avoid sharing customer data or private keys.
-5. **Resume:** Link a PDF resume when you have a reviewed, verified CV ready. A fictional placeholder CV link was deliberately not included.
+| Project | Status | Engineering focus |
+| --- | --- | --- |
+| [Microbusiness Operator](https://abdan-microbusiness-operator-staging.pages.dev/) | Offline-first MVP / pilot staging; source private | Sales, payments, expenses, receivables, local persistence, backup and recovery; TypeScript, IndexedDB/Dexie, PWA |
+| [SMP Tahfizh Quran Fantastis school website](https://school-website-h15.pages.dev/) | Live production website; [public source](https://github.com/abdanfx/school-website) | Responsive HTML, CSS, JavaScript, accessible editorial motion and verification |
+| [ABDAN WEATHER](https://abdan-weather-zero-cost-v01.abdansyakuran.workers.dev/) | Live MVP prototype | Weather-provider APIs, forecast and warning handling, data freshness, Cloudflare Workers |
+| ABDAN AI | Active R&D; no public demo linked | OpenAI API integration, conversation workflows, responsive chat interfaces and iterative verification |
 
-## Run locally (Debian / Linux)
+The current Microbusiness Operator MVP should not be marketed as AI-powered. ABDAN WEATHER does not claim predictive machine learning or radar. ABDAN AI remains under development. No unverified customer counts, performance results, or commercial outcomes are claimed.
+
+## Product storytelling motion
+
+The four project cards contain **illustrative**, lightweight interface animations:
+
+- **Microbusiness:** fictional sale entry → simulated save → dashboard and chart.
+- **School website:** heading → decorative line → editorial content reveal.
+- **ABDAN WEATHER:** sample forecast → curve drawing → illustrative indicators.
+- **ABDAN AI:** sample prompt → simulated processing → fictional response (no API call).
+
+Each plays automatically once upon entering view, keeps its completed state visible, and offers a keyboard-accessible **Replay demo** control. Motion respects `prefers-reduced-motion`, and meaningful content remains visible with JavaScript disabled. The previews are original CSS/HTML illustrations, **not actual application screenshots, recorded transactions, or live API responses**.
+
+## Technical approach
+
+- Semantic HTML, CSS and vanilla JavaScript; no framework or animation package needed for the portfolio.
+- Responsive layout, skip link, keyboard focus, accessible controls and reduced-motion support.
+- CSS transforms/keyframes and `IntersectionObserver` for restrained, one-time animations.
+- Python static verification, JavaScript syntax checks and manual Firefox desktop/mobile acceptance.
+- Cloudflare Pages direct-upload hosting with `_headers` security configuration.
+
+## Run locally
 
 ```bash
-cd ~/dev/projects/abdan-labs/abdan-portfolio
-python3 -m http.server 8080
-# Open http://localhost:8080
+git clone https://github.com/abdanfx/abdan-portfolio.git
+cd abdan-portfolio
+python3 -B -m http.server 8765 --bind 127.0.0.1
 ```
 
-If you downloaded the ZIP, extract it into `~/dev/projects/abdan-labs/abdan-portfolio` first. The website is static and also opens directly as a local `index.html` file.
+Open http://127.0.0.1:8765/ and stop the server with `Ctrl+C`.
 
-## Deploy to Cloudflare Pages (direct upload)
-
-Create your own `abdan-portfolio` Pages project first using the Cloudflare dashboard or Wrangler. Then run from the project root:
+## Verification
 
 ```bash
-npx wrangler login
-npx wrangler pages project create abdan-portfolio --production-branch main
-npx wrangler pages deploy . --project-name abdan-portfolio --branch main
+node --check script.js
+python3 -B scripts/verify.py
 ```
 
-**Safer upload option:** create a `dist/` folder and copy only `index.html`, `styles.css`, `script.js`, `robots.txt`, `_headers`, and `assets/favicon.svg` into it. Then deploy `dist/` instead of the repository root. This prevents deploying README and docs files or a future `.git` directory. The command to prepare `dist/` is:
+Optional `python3 -B scripts/browser-check.py` uses Playwright/Chromium when available. Automated static or browser checks do not replace testing the actual deployment.
+
+## Deployment
+
+**Production:** https://abdan-portfolio.pages.dev/ — Cloudflare Pages direct upload. The M2.2 release was manually accepted on 9 October 2026.
+
+Upload **public assets only**, not `.git`, internal docs or other repository files. The repository includes `scripts/build.sh`, which recreates `dist/` (removing a preexisting `dist/` folder):
 
 ```bash
-bash ./scripts/build.sh
+bash scripts/build.sh
 npx wrangler pages deploy dist --project-name abdan-portfolio --branch main
 ```
 
-This repo includes that `scripts/build.sh` build helper and `scripts/verify.py` static checks. The provided deployment name is a **suggestion**, not a claimed registered Pages URL. Cloudflare may require you to authenticate and choose an available project name.
+Cloudflare Pages is managed by **direct uploads**, not automatic Git-based deployment. A README-only commit does not require redeploying the website.
 
-> Cloudflare note: A direct-upload Pages project cannot subsequently be switched to Git integration. If automatic Git-based deployments are important from day one, create the project with Git integration instead.
-
-Cloudflare documentation: https://developers.cloudflare.com/pages/get-started/direct-upload/
-
-## Project presentation standards
-
-- Microbusiness Operator: offline-first, local storage, backup, sales and receivables; **not marketed as AI-powered in the current MVP**.
-- School Website: public source: https://github.com/abdanfx/school-website
-- ABDAN Weather: a live prototype, no claim of predictive ML model or real-time radar.
-- ABDAN AI: actively developed OpenAI API product; no finished-product claims and no public link unless one is separately verified.
-- No invented outcomes, user counts, revenue, Lighthouse scores, or testimonials.
-
-## Structure
+## Repository structure
 
 ```text
-index.html              page content + accessible markup
-styles.css              design system and responsive CSS
-script.js               email CTA + navigation enhancement
-assets/favicon.svg      compact original brand icon
-_headers                Cloudflare Pages response security headers
-robots.txt              crawler directive
-scripts/build.sh        prepare safe deploy artifact
-scripts/verify.py       validation checks
-docs/APPLICATION-KIT.md job-search positioning & templates
+index.html                  Portfolio content and illustrations
+styles.css                  Design system, responsive layout and motion
+script.js                   Contact behavior and motion lifecycle
+assets/favicon.svg         Original portfolio favicon
+_headers                   Cloudflare Pages security headers
+robots.txt                 Crawler directives
+scripts/verify.py          Static checks
+scripts/browser-check.py   Optional browser checks
+scripts/build.sh           Public asset packaging
+docs/APPLICATION-KIT.md   Job application preparation
 ```
 
-## Ownership
+## Git history and ownership
 
-© 2026 Abdan Syakuran / ABDAN LABS. Adapt for your own personal portfolio. Project showcase links point to separate apps with their own terms and privacy boundaries.
+The repository preserves both modern portfolio milestones and the original GitHub portfolio history. The older version is also accessible from [`legacy/github-original-20261009`](https://github.com/abdanfx/abdan-portfolio/tree/legacy/github-original-20261009).
 
-## Testing
-
-```bash
-python3 scripts/verify.py   # dependency-free static checks
-python3 scripts/browser-check.py  # optional: requires Playwright + Chromium
-```
-
-The optional browser test uses browser-injected static HTML/CSS/JS for sandbox compatibility. It confirms responsive layouts and behavior but does **not** replace a live HTTP/Cloudflare deployment test.
+Built and maintained by **Abdan Syakuran / ABDAN LABS**. Project maturity and source visibility vary as noted above.
