@@ -182,3 +182,200 @@ section[id] { scroll-margin-top: 90px; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .project-card:hover, .button:hover { transform: none; }
 }
+
+
+/* M2.2-B: fictional Microbusiness story — isolated from other project cards. */
+.business-tiles .business-summary-value {
+  display: block; margin-top: 11px; color: #236a58; font-size: clamp(8px, 1vw, 11px);
+  letter-spacing: -.02em; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.business-sale-demo {
+  position: absolute; inset: 0; z-index: 2; visibility: hidden; opacity: 0;
+  display: flex; flex-direction: column; gap: 15px; padding: 23px 22px;
+  background: #f7fffb; border-radius: 11px; color: #214e48; pointer-events: none;
+}
+.business-sale-eyebrow { color: #548e7b; font-weight: 850; font-size: 9px; letter-spacing: .12em; }
+.business-sale-field {
+  display: flex; flex-direction: column; gap: 8px; padding: 13px;
+  border: 1px solid #c8ded4; border-radius: 7px; background: #fff;
+}
+.business-sale-field > span { font-size: 10px; color: #60877c; }
+.business-sale-field strong { font-size: clamp(16px, 2.2vw, 23px); font-variant-numeric: tabular-nums; }
+.business-sale-amount { display: inline-block; }
+.business-sale-save {
+  align-self: stretch; padding: 10px 12px; text-align: center; border-radius: 6px;
+  background: #156e56; color: #fff; font-weight: 800; font-size: 11px;
+}
+.business-sale-confirm { color: #177455; font-weight: 800; font-size: 11px; opacity: 0; }
+.story-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.story-replay {
+  position: absolute; z-index: 5; right: 17px; bottom: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(211,255,237,.65); border-radius: 6px;
+  color: #fff; background: rgba(7,43,39,.93); cursor: pointer;
+  font-weight: 800; font-size: 10px; line-height: 1.1; font-family: inherit; padding: 9px 10px;
+}
+.story-replay[hidden] { display: none; }
+.story-replay:hover { background: #126e55; }
+.story-replay:focus-visible { outline: 3px solid #ffdd83; outline-offset: 3px; }
+.visual-business .visual-footnote { max-width: 58%; opacity: .9; }
+@media (max-width: 580px) {
+  .story-replay { right: 12px; bottom: 11px; padding: 8px; }
+  .business-sale-demo { padding: 16px 14px; gap: 11px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes business-sale-step {
+    0% { opacity: 0; transform: translateY(12px); }
+    8%, 50% { opacity: 1; transform: translateY(0); }
+    66%, 100% { opacity: 0; transform: translateY(-9px); }
+  }
+  @keyframes business-type-in {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes business-confirm-in {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes business-dashboard-in {
+    0%, 48% { opacity: 0; transform: translateY(10px); }
+    68%, 100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes business-value-in {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes business-bar-grow {
+    from { transform: scaleY(.06); opacity: .35; }
+    to { transform: scaleY(1); opacity: 1; }
+  }
+  [data-story="microbusiness"][data-story-state="playing"] .business-sale-demo {
+    visibility: visible; animation: business-sale-step 4800ms ease both;
+  }
+  [data-story="microbusiness"][data-story-state="playing"] .business-sale-amount {
+    animation: business-type-in 950ms steps(9, end) 650ms both;
+  }
+  [data-story="microbusiness"][data-story-state="playing"] .business-sale-confirm {
+    animation: business-confirm-in 450ms ease 1950ms both;
+  }
+  [data-story="microbusiness"][data-story-state="playing"] .business-dashboard {
+    animation: business-dashboard-in 4800ms ease both;
+  }
+  [data-story="microbusiness"][data-story-state="playing"] .business-summary-value {
+    animation: business-value-in 600ms ease 3200ms both;
+  }
+  [data-story="microbusiness"][data-story-state="playing"] .business-chart span {
+    transform-origin: center bottom;
+    animation: business-bar-grow 800ms cubic-bezier(.2,.8,.2,1) both;
+  }
+  [data-story="microbusiness"][data-story-state="playing"] .business-chart span:nth-child(1) { animation-delay: 3150ms; }
+  [data-story="microbusiness"][data-story-state="playing"] .business-chart span:nth-child(2) { animation-delay: 3240ms; }
+  [data-story="microbusiness"][data-story-state="playing"] .business-chart span:nth-child(3) { animation-delay: 3330ms; }
+  [data-story="microbusiness"][data-story-state="playing"] .business-chart span:nth-child(4) { animation-delay: 3420ms; }
+  [data-story="microbusiness"][data-story-state="playing"] .business-chart span:nth-child(5) { animation-delay: 3510ms; }
+  [data-story="microbusiness"][data-story-state="playing"] .business-chart span:nth-child(6) { animation-delay: 3600ms; }
+  [data-story="microbusiness"][data-story-state="playing"] .business-chart span:nth-child(7) { animation-delay: 3690ms; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-replay { display: none; }
+}
+
+
+/* M2.2-C: local-only storytelling; defaults display fully without JS. */
+.school-story-rule {
+  display: block; width: 60%; height: 2px; margin-top: 14px;
+  background: #5e9c82; transform-origin: left center;
+}
+.school-ui { overflow: hidden; }
+.weather-location {
+  margin-top: 9px; color: #b9e6ff; letter-spacing: .1em; font-size: 9px; font-weight: 800;
+}
+.weather-current { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.weather-current .weather-title { margin-top: 12px; font-size: clamp(18px, 2vw, 25px); }
+.weather-current .weather-sun { float: none; flex: 0 0 auto; font-size: 43px; transform: none; }
+.weather-forecast { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; margin-top: 13px; }
+.weather-forecast span {
+  min-width: 0; display: flex; flex-direction: column; gap: 5px;
+  padding: 7px 5px; background: rgba(180,227,255,.13); border-radius: 5px;
+  color: #c8eaff; font-size: 8px; letter-spacing: .02em;
+}
+.weather-forecast b { color: #fff; font-size: 15px; font-variant-numeric: tabular-nums; }
+.weather-trend { display: block; margin-top: 8px; width: 100%; height: 37px; overflow: visible; }
+.weather-trend path { fill: none; stroke: #9fe7fa; stroke-width: 2.6; stroke-linecap: round; }
+.weather-indicators { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.weather-indicators span {
+  border: 1px solid rgba(145,221,255,.3); border-radius: 3px;
+  padding: 5px 6px; font-size: 8px; color: #d3ebfa;
+}
+.visual-weather .weather-ui { margin-top: 18px; padding: 15px 17px 20px; }
+.visual-weather .visual-footnote, .visual-school .visual-footnote, .visual-ai .visual-footnote {
+  max-width: 60%; opacity: .84;
+}
+.visual-weather .story-replay { background: #0a3869; }
+.visual-ai .story-replay { background: #122a54; }
+.ai-processing {
+  height: 14px; margin-top: 8px; font-size: 10px; text-align: left;
+  color: #a4c7f0; visibility: hidden; opacity: 0;
+}
+.ai-example-response {
+  display: flex; flex-direction: column; gap: 5px; padding: 9px 11px;
+  text-align: left; border: 1px solid rgba(150,198,253,.35);
+  background: rgba(11,30,70,.45); border-radius: 7px;
+}
+.ai-example-response strong { color: #88c4ff; font-size: 8px; letter-spacing: .1em; }
+.ai-example-response span { color: #f0f6ff; font-size: 10px; line-height: 1.45; }
+.ai-example-response small { color: #c7d4ed; font-size: 8px; }
+.visual-ai .ai-ui { margin-top: 7px; }
+.visual-ai .ai-star { font-size: 31px; }
+.visual-ai .ai-ui p { font-size: 23px; margin: 6px 0 11px; }
+.visual-ai .ai-prompt { padding: 8px 11px; }
+.visual-ai .ai-prompt-text { white-space: nowrap; overflow: hidden; }
+.visual-ai .ai-prompt b { flex: 0 0 25px; }
+.project-ai .project-visual { min-height: 365px; }
+@media (max-width: 580px) {
+  .project-ai .project-visual { min-height: 350px; }
+  .visual-ai .ai-ui { width: 92%; }
+  .visual-ai .ai-ui p { font-size: 22px; }
+  .visual-weather .weather-ui { width: 96%; padding: 13px 12px 18px; }
+  .weather-current .weather-sun { font-size: 35px; }
+  .weather-current .weather-title { font-size: 19px; }
+  .weather-location { font-size: 8px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Timeline markers are intentionally invisible; animationend closes the state. */
+  @keyframes school-story-timeline { from { opacity: 1; } to { opacity: 1; } }
+  @keyframes weather-story-timeline { from { opacity: 1; } to { opacity: 1; } }
+  @keyframes ai-story-timeline { from { opacity: 1; } to { opacity: 1; } }
+  @keyframes story-rise { from { opacity: 0; transform: translateY(13px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes story-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes story-forecast-line { from { stroke-dashoffset: 320; } to { stroke-dashoffset: 0; } }
+  @keyframes story-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes story-processing {
+    0%, 100% { opacity: 0; visibility: hidden; }
+    12%, 78% { opacity: 1; visibility: visible; }
+  }
+  [data-story="school"][data-story-state="playing"] .school-ui { animation: school-story-timeline 2800ms linear both; }
+  [data-story="school"][data-story-state="playing"] .school-ui > p { animation: story-rise 650ms ease 170ms both; }
+  [data-story="school"][data-story-state="playing"] .school-story-rule { animation: story-draw 740ms ease 820ms both; }
+  [data-story="school"][data-story-state="playing"] .school-nav { animation: story-rise 430ms ease 80ms both; }
+  [data-story="school"][data-story-state="playing"] .school-image-pattern { animation: story-rise 790ms ease 1510ms both; }
+  [data-story="weather"][data-story-state="playing"] .weather-ui { animation: weather-story-timeline 3900ms linear both; }
+  [data-story="weather"][data-story-state="playing"] .weather-location { animation: story-rise 490ms ease 100ms both; }
+  [data-story="weather"][data-story-state="playing"] .weather-current { animation: story-rise 650ms ease 550ms both; }
+  [data-story="weather"][data-story-state="playing"] .weather-forecast span { animation: story-rise 520ms ease both; }
+  [data-story="weather"][data-story-state="playing"] .weather-forecast span:nth-child(1) { animation-delay: 1200ms; }
+  [data-story="weather"][data-story-state="playing"] .weather-forecast span:nth-child(2) { animation-delay: 1400ms; }
+  [data-story="weather"][data-story-state="playing"] .weather-forecast span:nth-child(3) { animation-delay: 1600ms; }
+  .weather-trend path { stroke-dasharray: 320; }
+  [data-story="weather"][data-story-state="playing"] .weather-trend path { animation: story-forecast-line 920ms ease 2070ms both; }
+  [data-story="weather"][data-story-state="playing"] .weather-indicators { animation: story-rise 540ms ease 3150ms both; }
+  [data-story="ai"][data-story-state="playing"] .ai-ui { animation: ai-story-timeline 4500ms linear both; }
+  [data-story="ai"][data-story-state="playing"] .ai-prompt { animation: story-rise 430ms ease 250ms both; }
+  [data-story="ai"][data-story-state="playing"] .ai-prompt-text { display: inline-block; animation: story-type 980ms steps(21,end) 650ms both; }
+  [data-story="ai"][data-story-state="playing"] .ai-processing { animation: story-processing 1200ms linear 1710ms both; }
+  [data-story="ai"][data-story-state="playing"] .ai-example-response { animation: story-rise 740ms ease 3080ms both; }
+  [data-story="ai"][data-story-state="playing"] .ai-example-response span { animation: story-type 690ms steps(15,end) 3420ms both; }
+}

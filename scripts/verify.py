@@ -63,7 +63,12 @@ assert_true('const reduceMotion' in js and 'revealObserver.unobserve' in js, 'On
 assert_true("const CONTACT_EMAIL = 'abdansyakuran@hotmail.com';" in js, 'Professional email not configured')
 assert_true('href="mailto:abdansyakuran@hotmail.com?subject=Portfolio%20inquiry"' in html, 'No-JS email link missing')
 assert_true('Email: abdansyakuran@hotmail.com' in html, 'Visible contact email missing')
-assert_true('Illustrative product interface' in html and 'Illustrative product direction' in html, 'Missing illustrative preview disclosures')
+assert_true(all(label in html for label in (
+    'Illustrative demo · fictional data',
+    'Illustrative design study',
+    'Illustrative forecast · sample data',
+    'Illustrative chat · no API call',
+)), 'Missing illustrative preview disclosures')
 assert_true('https://github.com/abdanfx/school-website' in html, 'Missing public school repo')
 assert_true((ROOT / '_headers').exists(), 'Missing security headers')
 assert_true((ROOT / 'assets/favicon.svg').exists(), 'Missing favicon')
@@ -80,6 +85,22 @@ for img in audit.images:
     assert_true('alt' in img, 'Image missing alt text')
 for f in ('index.html', 'styles.css', 'script.js', 'assets/favicon.svg'):
     assert_true((ROOT / f).stat().st_size > 0, f'Empty file: {f}')
+# M2.2-B: fictional preview, readable fallback, accessible manual replay.
+assert_true('data-story="microbusiness"' in html and 'data-story-replay' in html, 'Missing Microbusiness story/replay')
+assert_true('Illustrative demo · fictional data' in html and 'No actual transaction is recorded.' in html, 'Missing fictional demo disclosures')
+assert_true('business-sale-step' in css and '.story-replay[hidden]' in css, 'Missing Microbusiness story CSS')
+assert_true('storyObserver.unobserve(story)' in js and "story.dataset.storyState = 'complete'" in js, 'Missing one-time story lifecycle')
+# M2.2-C: three independent illustrated stories and keyboard Replay controls.
+for name in ('school', 'weather', 'ai'):
+    assert_true(f'data-story="{name}"' in html, f'Missing {name} story root')
+    assert_true(f'id="{name}-story-description"' in html, f'Missing {name} accessible description')
+assert_true(html.count('data-story-replay') == 4, 'Expected Replay controls for all four project stories')
+assert_true('No live weather data is requested.' in html and 'No AI API call is made.' in html,
+            'Missing illustrative data and API disclosures')
+assert_true('weather-story-timeline' in css and 'school-story-timeline' in css and 'ai-story-timeline' in css,
+            'Missing storyboard CSS')
+assert_true('storyObserver.unobserve(entry.target)' in js and 'storyReduce.matches' in js,
+            'Missing one-time story lifecycle or reduced-motion handling')
 if errors:
     print(f'FAIL: {len(errors)} issue(s)')
     for error in errors: print(' -', error)
