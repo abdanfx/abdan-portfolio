@@ -35,4 +35,28 @@
     }, { rootMargin: '-15% 0px -55% 0px', threshold: [0, 0.25, 0.5] });
     sections.forEach(section => observer.observe(section));
   }
+  // M2.1: progressive one-time entrances; no content is hidden without JS.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) {
+    document.documentElement.classList.add('motion-enabled');
+    if ('IntersectionObserver' in window) {
+      const targets = document.querySelectorAll(
+        '.section-head, .project-card, .expertise-card, .method-layout, .about-layout, .contact-inner'
+      );
+      const revealObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add('motion-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      }, { threshold: 0.07, rootMargin: '0px 0px -8% 0px' });
+      targets.forEach(target => {
+        // Do not hide any item already visible on initial load or refresh.
+        if (target.getBoundingClientRect().top > window.innerHeight * 0.95) {
+          target.classList.add('motion-pending');
+          revealObserver.observe(target);
+        }
+      });
+    }
+  }
 })();
