@@ -1,0 +1,6 @@
+dist/
+.qa/
+__pycache__/
+*.pyc
+.env
+.env.*
