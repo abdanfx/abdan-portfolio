@@ -4,7 +4,7 @@
 
   // Set your email here before going public, e.g. 'contact@example.com'.
   // Leave as an empty string to keep the GitHub contact button instead.
-  const CONTACT_EMAIL = '';
+  const CONTACT_EMAIL = 'abdansyakuran@hotmail.com';
 
   const year = document.getElementById('copyright-year');
   if (year) year.textContent = String(new Date().getFullYear());
